@@ -11,12 +11,13 @@ namespace Mango.Web.Service
     public class BaseService : IBaseService
     {
         private readonly IHttpClientFactory _httpClientFactory;
-
-        public BaseService(IHttpClientFactory httpClientFactory)
+        private readonly ITokenProvider _tokenProvider;
+        public BaseService(IHttpClientFactory httpClientFactory, ITokenProvider tokenProvider)
         {
             _httpClientFactory = httpClientFactory;
+            _tokenProvider = tokenProvider;
         }
-        public async Task<ResponseDto?> SendAsync(RequestDto requestDto)
+        public async Task<ResponseDto?> SendAsync(RequestDto requestDto, bool withBearer = true)
         {
             // Create an HttpClient instance using an HTTP client factory with the named client "MangoApi"
             HttpClient client = _httpClientFactory.CreateClient("MangoApi");
@@ -26,6 +27,15 @@ namespace Mango.Web.Service
 
             // Add an "Accept" header to indicate the client expects JSON responses
             message.Headers.Add("Accept", "application/json");
+
+            // If the request requires an authorization token, add a bearer token to the request headers
+            if (withBearer)
+            {
+                // Get the access token from the session
+                var accessToken = _tokenProvider.GetToken();
+
+                message.Headers.Add("Authorization", $"Bearer {accessToken}");
+            }
 
             // Set the request URI from the provided RequestDto object
             message.RequestUri = new Uri(requestDto.Url);

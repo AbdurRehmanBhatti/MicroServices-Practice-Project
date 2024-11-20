@@ -1,0 +1,48 @@
+﻿@model ProductDto
+
+<form asp-action="ProductDelete">
+    <br />
+    <div class="container border p-3">
+        <h1 class="text-dark text-center"> Delete Product </h1>
+        <input asp-for="ProductId" hidden />
+        <hr />
+        <div class="row">
+            <div class="col-2">
+                <label class="control-label pt-2 fs-5"> Product Id </label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="ProductId" class="form-control" disabled />
+            </div>
+            <div class="col-2">
+                <label class="control-label pt-2 fs-5"> Product Name </label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="Name" class="form-control" disabled />
+            </div>
+            <div class="col-2">
+                <label class="control-label pt-2 fs-5"> Price </label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="Price" class="form-control" disabled  />
+            </div>
+            <div class="col-2">
+                <label class="control-label pt-2 fs-5"> Description </label>
+            </div>
+            <div class="col-10 pb-3">
+                <textarea asp-for="Description" class="form-control" rows="5" disabled></textarea>
+            </div>
+            <div class="col-2">
+                <label class="control-label pt-2 fs-5"> Category Name </label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="CategoryName" class="form-control" disabled  />
+            </div>
+            <div class="col-5 offset-2">
+                <a asp-action="ProductIndex" class="btn btn-primary form-control"> Back to List </a>
+            </div>
+            <div class="col-5">
+                <input type="submit" value="Delete" class="btn btn-danger form-control" />
+            </div>
+        </div>
+    </div>
+</form>
