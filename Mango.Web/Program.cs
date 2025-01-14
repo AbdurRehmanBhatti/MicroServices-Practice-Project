@@ -15,16 +15,19 @@ builder.Services.AddHttpClient(); // To configure HttpClient (E.g, used in Coupo
 builder.Services.AddHttpClient<ICouponService, CouponService>();
 builder.Services.AddHttpClient<IAuthService, AuthService>();
 builder.Services.AddHttpClient<IProductService, ProductService>();
+builder.Services.AddHttpClient<IShoppingCartService, ShoppingCartService>();
 
 // This will retrieve the Url of CouponApi project from this project app settings
 SD.CouponApiBase = builder.Configuration["ServiceUrls:CouponApi"];
 SD.AuthApiBase = builder.Configuration["ServiceUrls:AuthApi"];
 SD.ProductApiBase = builder.Configuration["ServiceUrls:ProductApi"];
+SD.ShoppingCartApiBase = builder.Configuration["ServiceUrls:ShoppingCartApi"];
 
 // Registering the services with their lifetime
 builder.Services.AddScoped<IBaseService, BaseService>();
 builder.Services.AddScoped<ICouponService, CouponService>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ITokenProvider, TokenProvider>();
 
